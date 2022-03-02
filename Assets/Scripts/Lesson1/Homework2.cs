@@ -22,7 +22,7 @@ public class Homework2 : MonoBehaviour
         cancelTokenSource.Dispose();
     }
 
-    async void TaskSecond(CancellationToken cancelToken)
+    private async Task TaskSecond(CancellationToken cancelToken)
     {
         int i = 1;
         while (i < 1000)
@@ -34,7 +34,7 @@ public class Homework2 : MonoBehaviour
         Debug.Log("Одна секунда прошла");
     }
 
-    async void TaskFrames(CancellationToken cancelToken)
+    private async Task TaskFrames(CancellationToken cancelToken)
     {
         int i = 1;
         while (i < 60)
