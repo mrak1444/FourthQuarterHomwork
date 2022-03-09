@@ -17,6 +17,8 @@ public class Server : MonoBehaviour
 
     List<int> connectionIDs = new List<int>();
 
+    private Dictionary<int, string> _nameClients = new Dictionary<int, string>();
+
     [System.Obsolete]
     public void StartServer()
     {
@@ -26,6 +28,8 @@ public class Server : MonoBehaviour
         reliableChannel = cc.AddChannel(QosType.Reliable);
         HostTopology topology = new HostTopology(cc, MAX_CONNECTION);
         hostID = NetworkTransport.AddHost(topology, port);
+
+        Debug.Log("Sesver start");
 
         isStarted = true;
     }
@@ -87,8 +91,14 @@ public class Server : MonoBehaviour
                 case NetworkEventType.DataEvent:
                     string message = Encoding.Unicode.GetString(recBuffer, 0, dataSize);
 
-                    SendMessageToAll($"Player {connectionId}: {message}");
-                    Debug.Log($"Player {connectionId}: {message}");
+                    if (!_nameClients.ContainsKey(connectionId))
+                    {
+                        _nameClients.Add(connectionId, message);
+                        break;
+                    }
+
+                    SendMessageToAll($"Player {connectionId} ({_nameClients[connectionId]}): {message}");
+                    Debug.Log($"Player {connectionId} ({_nameClients[connectionId]}): {message}");
                     break;
 
                 case NetworkEventType.DisconnectEvent:
@@ -96,6 +106,7 @@ public class Server : MonoBehaviour
 
                     SendMessageToAll($"Player {connectionId} has disconnected.");
                     Debug.Log($"Player {connectionId} has disconnected.");
+
                     break;
 
                 case NetworkEventType.BroadcastEvent:

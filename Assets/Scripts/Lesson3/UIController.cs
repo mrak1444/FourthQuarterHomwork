@@ -19,6 +19,10 @@ public class UIController : MonoBehaviour
 
     [SerializeField]
     private TMP_InputField inputField;
+    [SerializeField]
+    private TMP_InputField inputName;
+    [SerializeField]
+    private TextMeshProUGUI placeholderText;
 
 
     [SerializeField]
@@ -55,7 +59,15 @@ public class UIController : MonoBehaviour
     [System.Obsolete]
     private void Connect()
     {
-        client.Connect();
+        if(inputName.text != "")
+        {
+            client.Connect(inputName.text);
+        }
+        else
+        {
+            placeholderText.text = "INPUT YOUR NAME!";
+        }
+        
     }
 
     [System.Obsolete]
