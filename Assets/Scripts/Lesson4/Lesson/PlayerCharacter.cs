@@ -42,12 +42,13 @@ public class PlayerCharacter : Character
             movement = transform.TransformDirection(movement);
             characterController.Move(movement);
             mouseLook.Rotation();
-            CmdUpdatePosition(transform.position);
+            CmdUpdatePosition(transform.position, transform.rotation);
         }
         else
         {
             transform.position = Vector3.SmoothDamp(transform.position,
             serverPosition, ref currentVelocity, movingSpeed * Time.deltaTime);
+            transform.rotation = serverRotation;
         }
     }
     private void Start()
