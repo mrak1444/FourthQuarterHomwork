@@ -328,8 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3856a6987c49f142ad61dd480a8d9a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-  material: {fileID: 2100000, guid: b37a8ae803f9ff3458d86d9b241e8887, type: 2}
+  _mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  _material: {fileID: 2100000, guid: b37a8ae803f9ff3458d86d9b241e8887, type: 2}
   _depth: 4
   _rotationSpeed: 19
 --- !u!4 &542159705
