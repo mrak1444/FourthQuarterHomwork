@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 
+[ExecuteInEditMode]
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class Star2 : MonoBehaviour
 {
@@ -15,10 +16,10 @@ public class Star2 : MonoBehaviour
 
     private int[] _triangles;
 
-    private void Start()
+    /*private void Start()
     {
         UpdateMesh();
-    }
+    }*/
 
     public void UpdateMesh()
     {
@@ -32,9 +33,14 @@ public class Star2 : MonoBehaviour
 
         _points ??= Array.Empty<ColorPoint>();
         var numberOfPoints = _frequency * _points.Length;
-        _vertices = new Vector3[numberOfPoints + 1];
-        _colors = new Color[numberOfPoints + 1];
-        _triangles = new int[numberOfPoints * 3];
+
+        if (_vertices == null || _vertices.Length != numberOfPoints + 1)
+        {
+            _vertices = new Vector3[numberOfPoints + 1];
+            _colors = new Color[numberOfPoints + 1];
+            _triangles = new int[numberOfPoints * 3];
+            _mesh.Clear();
+        }
 
         if (numberOfPoints >= 3)
         {
@@ -58,5 +64,11 @@ public class Star2 : MonoBehaviour
         _mesh.vertices = _vertices;
         _mesh.colors = _colors;
         _mesh.triangles = _triangles;
+        _mesh.hideFlags = HideFlags.HideAndDontSave;
+    }
+
+    private void Reset()
+    {
+        UpdateMesh();
     }
 }

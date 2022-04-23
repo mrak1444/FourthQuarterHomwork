@@ -26,7 +26,7 @@ public class LookAtPointEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 
-public void OnSceneGUI()
+    public void OnSceneGUI()
     {
         var t = target as LookAt;
         EditorGUI.BeginChangeCheck();
